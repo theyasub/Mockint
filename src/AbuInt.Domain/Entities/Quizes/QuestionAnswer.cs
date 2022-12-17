@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AbuInt.Domain.Entities.Quize;
+namespace AbuInt.Domain.Entities.Quizes;
 
 public class QuestionAnswer : Auditable
 {
