@@ -1,4 +1,4 @@
-namespace AbuInt.Service.Commons.Helpers;
+namespace AbuInt.Service.Helpers;
 
 public class ImageHelper
 {
