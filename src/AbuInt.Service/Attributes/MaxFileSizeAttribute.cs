@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-using AbuInt.Service.Commons.Helpers;
+using AbuInt.Service.Helpers;
 using Microsoft.AspNet.Http;
 
-namespace AbuInt.Service.Commons.Attributes;
+namespace AbuInt.Service.Attributes;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class MaxFileSizeAttribute : ValidationAttribute
