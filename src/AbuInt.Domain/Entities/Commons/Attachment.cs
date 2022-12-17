@@ -1,4 +1,4 @@
-using AbuInt.Domain.Commons;
+﻿using AbuInt.Domain.Commons;
 
 namespace AbuInt.Domain.Entities.Commons;
 

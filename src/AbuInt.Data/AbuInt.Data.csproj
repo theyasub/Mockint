@@ -14,6 +14,10 @@
 	  
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AbuInt.Domain\AbuInt.Domain.csproj" />
+  </ItemGroup>
+
 
 	<PropertyGroup>
 		<NoWarn>1998</NoWarn>
