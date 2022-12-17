@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AbuInt.Domain.Entities.Users;
 
-namespace AbuInt.Domain.Entities.Quize;
+namespace AbuInt.Domain.Entities.Quizes;
 
 public class QuizeResult : BaseEntity
 {

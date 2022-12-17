@@ -1,7 +1,7 @@
 ﻿using AbuInt.Domain.Commons;
 using System.ComponentModel.DataAnnotations;
 
-namespace AbuInt.Domain.Entities.Quize;
+namespace AbuInt.Domain.Entities.Quizes;
 
 public class Question : Auditable
 {
