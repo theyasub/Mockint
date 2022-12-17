@@ -24,7 +24,7 @@ public class AuthService : IAuthService
     public async ValueTask<string> GenerateToken(string username, string password)
     {
         User user = await this.unitOfWork.Users.GetAsync(user =>
-            user.UserName.Equals(username));
+            user.Username.Equals(username));
 
         if (user == null)
             throw new CustomException(400, "Login or Password is incorrect");
