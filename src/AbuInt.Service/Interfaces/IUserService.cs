@@ -12,7 +12,7 @@ public interface IUserService
     /// </summary>
     /// <param name="userForCreationDto"></param>
     /// <returns></returns>
-    ValueTask<UserForCreationDto> CreateAsync(UserForCreationDto userForCreationDto);
+    ValueTask<User> CreateAsync(UserForCreationDto userForCreationDto);
     
     /// <summary>
     /// Update User
@@ -20,14 +20,14 @@ public interface IUserService
     /// <param name="id"></param>
     /// <param name="userForCreationDto"></param>
     /// <returns></returns>
-    ValueTask<UserForCreationDto> UpdateAsync(int id, UserForCreationDto userForCreationDto);
+    ValueTask<User> UpdateAsync(int id, UserForCreationDto userForCreationDto);
     
     /// <summary>
     ///  Get User's information
     /// </summary>
     /// <param name="expression"></param>
     /// <returns></returns>
-    ValueTask<UserForCreationDto> GetAsync(Expression<Func<UserForCreationDto, bool>> expression);
+    ValueTask<User> GetAsync(Expression<Func<UserForCreationDto, bool>> expression);
     
     /// <summary>
     ///  Get All User's Informations
@@ -36,7 +36,7 @@ public interface IUserService
     /// <param name="expression"></param>
     /// <param name="search"></param>
     /// <returns></returns>
-    ValueTask<IEnumerable<UserForCreationDto>> GetAllAsync(PaginationParams @params, Expression<Func<UserForCreationDto, bool>> expression = null, string search = null);
+    ValueTask<IEnumerable<User>> GetAllAsync(PaginationParams @params, Expression<Func<UserForCreationDto, bool>> expression = null, string search = null);
     
     /// <summary>
     /// Delete User's Information
@@ -49,5 +49,5 @@ public interface IUserService
     /// Get Current User
     /// </summary>
     /// <returns></returns>
-    ValueTask<UserForCreationDto> GetInfoAsync();
+    ValueTask<User> GetInfoAsync();
 }
