@@ -27,7 +27,7 @@ public interface IUserService
     /// </summary>
     /// <param name="expression"></param>
     /// <returns></returns>
-    ValueTask<User> GetAsync(Expression<Func<UserForCreationDto, bool>> expression);
+    ValueTask<User> GetAsync(Expression<Func<User, bool>> expression);
     
     /// <summary>
     ///  Get All User's Informations
@@ -36,14 +36,14 @@ public interface IUserService
     /// <param name="expression"></param>
     /// <param name="search"></param>
     /// <returns></returns>
-    ValueTask<IEnumerable<User>> GetAllAsync(PaginationParams @params, Expression<Func<UserForCreationDto, bool>> expression = null, string search = null);
+    ValueTask<IEnumerable<User>> GetAllAsync(PaginationParams @params, Expression<Func<User, bool>> expression = null, string search = null);
     
     /// <summary>
     /// Delete User's Information
     /// </summary>
     /// <param name="expression"></param>
     /// <returns></returns>
-    ValueTask<bool> DeleteAsync(Expression<Func<UserForCreationDto, bool>> expression);
+    ValueTask<bool> DeleteAsync(Expression<Func<User, bool>> expression);
     
     /// <summary>
     /// Get Current User
