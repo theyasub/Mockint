@@ -9,6 +9,7 @@ namespace AbuInt.API.Extensions;
 
 public static class ServiceExtensions
 {
+    #region Jwt Service
     public static void AddJwtService(this IServiceCollection services, IConfiguration config)
     {
 
@@ -36,7 +37,9 @@ public static class ServiceExtensions
             };
         });
     }
+    #endregion
 
+    #region Setup Swagger
     public static void AddSwaggerService(this IServiceCollection services)
     {
         services.AddSwaggerGen(c =>
@@ -70,4 +73,5 @@ public static class ServiceExtensions
             });
         });
     }
+    #endregion
 }
