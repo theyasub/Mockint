@@ -24,8 +24,8 @@ public class UserService : IUserService
         User user = await this.unitOfWork.Users.GetAsync(user =>
             user.Username.Equals(userForCreationDto.Username));
 
-        if (user is null)
-            throw new CustomException(404, "User not found");
+        if (user is not null)
+            throw new CustomException(404, "User alredy exists");
 
         user = userForCreationDto.Adapt<User>();
         user.Create();
