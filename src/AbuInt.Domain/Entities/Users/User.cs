@@ -3,6 +3,7 @@ using AbuInt.Domain.Entities.Chats;
 using AbuInt.Domain.Entities.Commons;
 using AbuInt.Domain.Entities.Companies;
 using AbuInt.Domain.Enums;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AbuInt.Domain.Entities.Users;
@@ -13,6 +14,8 @@ public class User : Auditable
     public string LastName { get; set; }
     public string UserName { get; set; }
     public string Gmail { get; set; }
+
+    [JsonIgnore]
     public string Password { get; set; }
     public Role Role { get; set; }
     public bool IsEmailVerified { get; set; }
