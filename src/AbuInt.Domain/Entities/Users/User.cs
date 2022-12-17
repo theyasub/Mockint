@@ -1,4 +1,5 @@
 using AbuInt.Domain.Commons;
+using AbuInt.Domain.Entities.Commons;
 using AbuInt.Domain.Enums;
 
 namespace AbuInt.Domain.Entities.Users;
@@ -16,4 +17,7 @@ public class User : Auditable
 
     public int UserDetailsId { get; set; }
     public UserDetail UserDetails { get; set; }
+
+    public int ImageId { get; set; }
+    public Asset Image { get; set; }
 }

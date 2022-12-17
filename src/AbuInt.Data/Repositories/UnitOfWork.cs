@@ -1,6 +1,5 @@
 ﻿using AbuInt.Data.DbContexts;
 using AbuInt.Data.IRepositories;
-using AbuInt.Domain.Entities.Commons;
 using AbuInt.Domain.Entities.Companies;
 using AbuInt.Domain.Entities.Quizes;
 using AbuInt.Domain.Entities.Users;
@@ -10,7 +9,7 @@ namespace AbuInt.Data.Repositories;
 public class UnitOfWork : IUnitOfWork
 {
     #region Commons
-    public IRepository<Attachment> Attachments { get; }
+    //public IRepository<Attachment> Attachments { get; }
     #endregion
 
     #region Companies
@@ -39,7 +38,7 @@ public class UnitOfWork : IUnitOfWork
         DbContext = dbContext;
 
         #region Commons
-        Attachments = new Repository<Attachment>(dbContext);
+        //Attachments = new Repository<Attachment>(dbContext);
         #endregion
 
         #region Companies
