@@ -1,5 +1,6 @@
 ﻿using AbuInt.Data.DbContexts;
 using AbuInt.Data.IRepositories;
+using AbuInt.Domain.Entities.Chats;
 using AbuInt.Domain.Entities.Companies;
 using AbuInt.Domain.Entities.Quizes;
 using AbuInt.Domain.Entities.Users;

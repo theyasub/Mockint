@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbuInt.Data.Migrations
 {
     [DbContext(typeof(AbuIntDbContext))]
-    [Migration("20221217182612_InitialMigration")]
+    [Migration("20221217205853_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,128 @@ namespace AbuInt.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("AbuInt.Domain.Entities.Chats.Interview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("Interviews");
+                });
+
+            modelBuilder.Entity("AbuInt.Domain.Entities.Chats.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("AbuInt.Domain.Entities.Chats.Participant", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Participants");
+                });
+
+            modelBuilder.Entity("AbuInt.Domain.Entities.Chats.Room", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("RoomType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Rooms");
+                });
 
             modelBuilder.Entity("AbuInt.Domain.Entities.Commons.Asset", b =>
                 {
@@ -72,6 +194,9 @@ namespace AbuInt.Data.Migrations
                     b.Property<DateTime>("Created_at")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ImageId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
@@ -84,52 +209,11 @@ namespace AbuInt.Data.Migrations
                     b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Companies");
-                });
-
-            modelBuilder.Entity("AbuInt.Domain.Entities.Companies.Interview", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<int>("InterviewerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("InterviewerId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Interviews");
                 });
 
             modelBuilder.Entity("AbuInt.Domain.Entities.Companies.Vacancy", b =>
@@ -395,7 +479,10 @@ namespace AbuInt.Data.Migrations
                     b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserDetailsId")
+                    b.Property<int?>("UserDetailId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserDetailsId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
@@ -405,7 +492,9 @@ namespace AbuInt.Data.Migrations
 
                     b.HasIndex("ImageId");
 
-                    b.HasIndex("UserDetailsId");
+                    b.HasIndex("UserDetailsId")
+                        .IsUnique()
+                        .HasFilter("[UserDetailsId] IS NOT NULL");
 
                     b.ToTable("Users");
                 });
@@ -446,34 +535,64 @@ namespace AbuInt.Data.Migrations
                     b.ToTable("UserDetails");
                 });
 
-            modelBuilder.Entity("AbuInt.Domain.Entities.Companies.Company", b =>
+            modelBuilder.Entity("AbuInt.Domain.Entities.Chats.Interview", b =>
                 {
+                    b.HasOne("AbuInt.Domain.Entities.Chats.Room", "Room")
+                        .WithMany("Interviews")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Room");
+                });
+
+            modelBuilder.Entity("AbuInt.Domain.Entities.Chats.Message", b =>
+                {
+                    b.HasOne("AbuInt.Domain.Entities.Chats.Room", "Room")
+                        .WithMany("Messages")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AbuInt.Domain.Entities.Users.User", "User")
-                        .WithMany()
+                        .WithMany("Messages")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Room");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("AbuInt.Domain.Entities.Companies.Interview", b =>
+            modelBuilder.Entity("AbuInt.Domain.Entities.Chats.Participant", b =>
                 {
-                    b.HasOne("AbuInt.Domain.Entities.Users.User", "Interviewer")
-                        .WithMany()
-                        .HasForeignKey("InterviewerId")
+                    b.HasOne("AbuInt.Domain.Entities.Chats.Room", "Room")
+                        .WithMany("Participants")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("AbuInt.Domain.Entities.Users.User", "User")
-                        .WithMany()
+                        .WithMany("Participants")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Interviewer");
+                    b.Navigation("Room");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("AbuInt.Domain.Entities.Companies.Company", b =>
+                {
+                    b.HasOne("AbuInt.Domain.Entities.Commons.Asset", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("AbuInt.Domain.Entities.Companies.Vacancy", b =>
@@ -485,9 +604,9 @@ namespace AbuInt.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("AbuInt.Domain.Entities.Users.User", "User")
-                        .WithMany()
+                        .WithMany("Vacancies")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Company");
@@ -551,15 +670,14 @@ namespace AbuInt.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AbuInt.Domain.Entities.Users.UserDetail", "UserDetails")
-                        .WithMany()
-                        .HasForeignKey("UserDetailsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("AbuInt.Domain.Entities.Users.UserDetail", "UserDetail")
+                        .WithOne("User")
+                        .HasForeignKey("AbuInt.Domain.Entities.Users.User", "UserDetailsId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Image");
 
-                    b.Navigation("UserDetails");
+                    b.Navigation("UserDetail");
                 });
 
             modelBuilder.Entity("AbuInt.Domain.Entities.Users.UserDetail", b =>
@@ -573,6 +691,15 @@ namespace AbuInt.Data.Migrations
                     b.Navigation("Resume");
                 });
 
+            modelBuilder.Entity("AbuInt.Domain.Entities.Chats.Room", b =>
+                {
+                    b.Navigation("Interviews");
+
+                    b.Navigation("Messages");
+
+                    b.Navigation("Participants");
+                });
+
             modelBuilder.Entity("AbuInt.Domain.Entities.Quizes.Question", b =>
                 {
                     b.Navigation("Answers");
@@ -583,9 +710,20 @@ namespace AbuInt.Data.Migrations
                     b.Navigation("Questions");
                 });
 
+            modelBuilder.Entity("AbuInt.Domain.Entities.Users.User", b =>
+                {
+                    b.Navigation("Messages");
+
+                    b.Navigation("Participants");
+
+                    b.Navigation("Vacancies");
+                });
+
             modelBuilder.Entity("AbuInt.Domain.Entities.Users.UserDetail", b =>
                 {
                     b.Navigation("ExperiencesId");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

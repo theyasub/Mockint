@@ -6,7 +6,7 @@ namespace AbuInt.Domain.Entities.Companies;
 
 public class Vacancy : Auditable
 {
-    public int  CompanyId { get; set; }
+    public int CompanyId { get; set; }
     public Company Company { get; set; }
 
     public int UserId { get; set; }

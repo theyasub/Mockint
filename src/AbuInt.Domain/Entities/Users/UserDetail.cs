@@ -13,4 +13,6 @@ public class UserDetail : Auditable
 
     public int ResumeId { get; set; }
     public Asset Resume { get; set; }
+
+    public User User { get; set; }
 }
