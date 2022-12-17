@@ -13,5 +13,7 @@ public class User : Auditable
     public Role Role { get; set; }
     public bool IsEmailVerified { get; set; }
     public Guid Salt { get; set; }
-    public UserDetails UserDetailsId { get; set; }
+
+    public int UserDetailsId { get; set; }
+    public UserDetails UserDetails { get; set; }
 }
