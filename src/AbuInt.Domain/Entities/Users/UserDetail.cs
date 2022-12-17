@@ -4,7 +4,7 @@ using AbuInt.Domain.Enums;
 
 namespace AbuInt.Domain.Entities.Users;
 
-public class UserDetails : Auditable
+public class UserDetail : Auditable
 {
     public virtual ICollection<Experience> ExperiencesId { get; set; }
     public string Phonenumber { get; set; }

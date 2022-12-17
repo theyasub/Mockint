@@ -15,5 +15,5 @@ public class User : Auditable
     public Guid Salt { get; set; }
 
     public int UserDetailsId { get; set; }
-    public UserDetails UserDetails { get; set; }
+    public UserDetail UserDetails { get; set; }
 }
