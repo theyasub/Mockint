@@ -1,0 +1,14 @@
+using System.ComponentModel.DataAnnotations;
+using AbuInt.Service.DTOs.Users;
+
+namespace AbuInt.Service.DTOs.Company;
+
+public class InterviewForCreationDto
+{
+    [Required]
+    public UserForCreationDto UserForCreationDto { get; set; }
+    [Required]
+    public UserForCreationDto InterviewerForCreationDto { get; set; }
+    [Required]
+    public DateTime StartTime { get; set; } 
+}

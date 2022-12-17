@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using AbuInt.Service.Helpers;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Http;
 
 namespace AbuInt.Service.Attributes;
 
