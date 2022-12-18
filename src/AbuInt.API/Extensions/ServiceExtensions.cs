@@ -58,7 +58,6 @@ public static class ServiceExtensions
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "AbuInt.Api", Version = "v1" });
             var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {

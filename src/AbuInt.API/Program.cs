@@ -51,7 +51,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 
-    .WebRootPath = app.Services.GetRequiredService<IWebHostEnvironment>()?.WebRootPath;
+    EnvironmentHelper.WebRootPath = app.Services.GetRequiredService<IWebHostEnvironment>()?.WebRootPath;
 
 if (app.Services.GetService<IHttpContextAccessor>() != null)
     HttpContextHelper.Accessor = app.Services.GetRequiredService<IHttpContextAccessor>();
