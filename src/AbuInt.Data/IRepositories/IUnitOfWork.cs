@@ -1,5 +1,6 @@
 ﻿using AbuInt.Data.DbContexts;
 using AbuInt.Domain.Entities.Chats;
+using AbuInt.Domain.Entities.Commons;
 using AbuInt.Domain.Entities.Companies;
 using AbuInt.Domain.Entities.Quizes;
 using AbuInt.Domain.Entities.Users;
@@ -10,7 +11,7 @@ namespace AbuInt.Data.IRepositories;
 public interface IUnitOfWork : IDisposable
 {
     #region Commons
-    //public IRepository<Attachment> Attachments { get; }
+    public IRepository<Asset> Assets { get; }
     #endregion
 
     #region Companies

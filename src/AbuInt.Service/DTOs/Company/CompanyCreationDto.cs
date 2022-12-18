@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using AbuInt.Service.DTOs.Users;
+using Microsoft.AspNetCore.Http;
 
 namespace AbuInt.Service.DTOs.Company;
 
@@ -9,5 +10,6 @@ public class CompanyCreationDto
     public string Name { get; set; }
     
     public string Location { get; set; }
-    public UserForCreationDto UserForCreationDto { get; set; }
+
+    public IFormFile Image { get; set; }
 }   
