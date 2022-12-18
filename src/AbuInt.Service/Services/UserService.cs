@@ -1,9 +1,12 @@
 ﻿using AbuInt.Data.IRepositories;
 using AbuInt.Domain.Configuration;
+using AbuInt.Domain.Entities.Commons;
 using AbuInt.Domain.Entities.Users;
+using AbuInt.Service.DTOs.Company;
 using AbuInt.Service.DTOs.Users;
 using AbuInt.Service.Exceptions;
 using AbuInt.Service.Extensions;
+using AbuInt.Service.Helpers;
 using AbuInt.Service.Interfaces.Users;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +16,12 @@ namespace AbuInt.Service.Services;
 
 public class UserService : IUserService
 {
-    public IUnitOfWork unitOfWork { get; set; }
-    public UserService(IUnitOfWork unitOfWork)
+    private readonly IUnitOfWork unitOfWork;
+    private readonly FIleHelper fileHelper;
+    public UserService(IUnitOfWork unitOfWork, FIleHelper fileHelper)
     {
         this.unitOfWork = unitOfWork;
+        this.fileHelper = fileHelper;
     }
 
     public async ValueTask<User> CreateAsync(UserForCreationDto userForCreationDto)
@@ -28,9 +33,29 @@ public class UserService : IUserService
             throw new CustomException(400, "User alredy exists");
 
         user = userForCreationDto.Adapt<User>();
+        user.Password = SecurityService.Encrypt(userForCreationDto.Password, user.Salt.ToString());
+        if (userForCreationDto.Image is not null)
+        {
+            var attachmentData = await fileHelper.SaveAsync(userForCreationDto.Image);
 
-        var result = await this.unitOfWork.Users.CreateAsync(user);
+            Asset newAsset = new Asset()
+            {
+                Name = attachmentData.fileName,
+                Path = attachmentData.filePath
+            };
+
+            newAsset.Create();
+
+            newAsset = await unitOfWork.Assets.CreateAsync(newAsset);
+            await unitOfWork.SaveChangesAsync();
+
+
+            user.ImageId = newAsset.Id;
+        }
+
         user.Create();
+        
+        var result = await this.unitOfWork.Users.CreateAsync(user);
 
         await this.unitOfWork.SaveChangesAsync();
 

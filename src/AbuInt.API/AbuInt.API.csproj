@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -19,10 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\files\" />
     <ProjectReference Include="..\AbuInt.Data\AbuInt.Data.csproj" />
     <ProjectReference Include="..\AbuInt.Service\AbuInt.Service.csproj" />
     <Folder Include="Logs\" />
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 
     <PropertyGroup>

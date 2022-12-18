@@ -1,5 +1,6 @@
 ﻿using AbuInt.Data.IRepositories;
 using AbuInt.Data.Repositories;
+using AbuInt.Service.Helpers;
 using AbuInt.Service.Interfaces.Users;
 using AbuInt.Service.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -18,6 +19,7 @@ public static class ServiceExtensions
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<FIleHelper>();
     }
     #endregion
 
