@@ -1,6 +1,5 @@
 ﻿using AbuInt.Data.IRepositories;
 using AbuInt.Data.Repositories;
-using AbuInt.Service.Helpers;
 using AbuInt.Service.Interfaces.Users;
 using AbuInt.Service.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -9,6 +8,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
+using AbuInt.Service.Helpers;
+using AbuInt.Service.Interfaces;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace AbuInt.API.Extensions;
 
@@ -19,7 +21,11 @@ public static class ServiceExtensions
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<FIleHelper>();
+        services.AddScoped<IMemoryCache, MemoryCache>();
+        services.AddScoped<EmailHelper>();
+        services.AddScoped<IAuthService, AuthService>();
     }
     #endregion
 
