@@ -19,6 +19,7 @@ public class User : Auditable
     public string Password { get; set; }
     public Role Role { get; set; }
     public bool IsEmailVerified { get; set; }
+
     public Guid Salt { get; set; } = Guid.NewGuid();
 
     public int ImageId { get; set; }

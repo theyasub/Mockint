@@ -1,4 +1,4 @@
-﻿using AbuInt.Data.IRepositories;
+using AbuInt.Data.IRepositories;
 using AbuInt.Domain.Entities.Users;
 using AbuInt.Service.Exceptions;
 using AbuInt.Service.Helpers;
@@ -24,7 +24,8 @@ public class AuthService : IAuthService
     public async ValueTask<string> GenerateToken(string username, string password)
     {
         User user = await this.unitOfWork.Users.GetAsync(user =>
-            user.Username.Equals(username));
+            user.UserName.Equals(username) || user.Gmail.Equals(username));
+
 
         if (user == null)
             throw new CustomException(400, "Login or Password is incorrect");
