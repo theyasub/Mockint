@@ -9,26 +9,38 @@ namespace AbuInt.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class UserAccountController : RESTFulController
+public class UserAccountsController : RESTFulController
 {
     public IAccountService accountService { get; set; }
-    public UserAccountController(IAccountService accountService)
+    public UserAccountsController(IAccountService accountService)
     {
         this.accountService = accountService;
     }
     
     /// <summary>
-    ///  Login user
+    /// Log in through parametrs
     /// </summary>
-    /// <param name="userForLoginDto"></param>
+    /// <param name="viewModel"></param>
     /// <returns></returns>
     [HttpPost("login"), AllowAnonymous]
     public async Task<IActionResult> LogInAsync([FromForm] UserForLoginDto viewModel)
         => Ok(new { Token = await accountService.UserLoginAsync(viewModel) });
 
+    /// <summary>
+    /// Verify exist email
+    /// </summary>
+    /// <param name="email"></param>
+    /// <returns></returns>
+
     [HttpPost("verifyemail")]
     public async Task<IActionResult> VerifyEmail([FromBody] EmailVerify email)
         => Ok(await accountService.VerifyEmailAsync(email));
+
+    /// <summary>
+    /// Send notification to email
+    /// </summary>
+    /// <param name="email"></param>
+    /// <returns></returns>
 
     [HttpPost("sendcode"), AllowAnonymous]
     public async Task<IActionResult> SendToEmail([FromBody] SentToEmail email)
@@ -37,6 +49,11 @@ public class UserAccountController : RESTFulController
         return Ok();
     }
 
+    /// <summary>
+    /// Change password
+    /// </summary>
+    /// <param name="forgetPassword"></param>
+    /// <returns></returns>
     [HttpPost("reset-password"), AllowAnonymous]
     public async Task<IActionResult> ForgotPasswordAsync([FromQuery] UserForResertPasswordDto forgetPassword)
         => Ok(await accountService.VerifyPasswordAsync(forgetPassword));
