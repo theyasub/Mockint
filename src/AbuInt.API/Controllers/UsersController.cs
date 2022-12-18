@@ -10,10 +10,10 @@ namespace AbuInt.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : RESTFulController
+    public class UsersController : RESTFulController
     {
         public IUserService userService { get; set; }
-        public UserController(IUserService userService)
+        public UsersController(IUserService userService)
         {
             this.userService = userService;
         }
