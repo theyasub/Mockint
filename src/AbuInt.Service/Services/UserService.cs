@@ -80,8 +80,8 @@ public class UserService : IUserService
         var users = this.unitOfWork.Users.GetAll(expression, isTracking: false);
 
         if (!string.IsNullOrEmpty(search))
-            await users.Where(user => user.FirstName.Contains(search) ||
-                       user.LastName.Contains(search))
+            await users.Where(user => user.FirstName == search ||
+                       user.LastName == search)
                        .ToPagedList(@params).ToListAsync();
         
         return await users.ToPagedList(@params).ToListAsync();
