@@ -12,7 +12,7 @@ public class FIleHelper
     ///<summary>
     /// This method th file save
     ///<summary>
-    public async Task<string> SaveAsync(IFormFile file, FileType fileType = FileType.Image)
+    public async Task<(string fileName, string filePath )> SaveAsync(IFormFile file, FileType fileType = FileType.Image)
     {
         string fileName = ImageHelper.MakeImageName(file.FileName);
         
@@ -40,7 +40,7 @@ public class FIleHelper
         await file.CopyToAsync(stream);
         stream.Close();
 
-        return partPath;
+        return (fileName, partPath);
     }
 
     ///<summary>

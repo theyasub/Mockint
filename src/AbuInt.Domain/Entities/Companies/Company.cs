@@ -10,6 +10,6 @@ public class Company : Auditable
     public string Location { get; set; }
     public DateTime Created_at { get; set; }
 
-    public int ImageId { get; set; }
+    public int? ImageId { get; set; }
     public Asset Image { get; set; }
 }

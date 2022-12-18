@@ -26,6 +26,9 @@ public class AbuIntDbContext : DbContext
 			.HasOne(x => x.User)
 			.WithMany(x => x.Vacancies)
 			.OnDelete(DeleteBehavior.NoAction);
+
+    modelBuilder.Entity<User>().Navigation(x => x.Image).AutoInclude();
+
 	}
 
 	#region Asset
