@@ -27,7 +27,8 @@ public class AbuIntDbContext : DbContext
 			.WithMany(x => x.Vacancies)
 			.OnDelete(DeleteBehavior.NoAction);
 
-		modelBuilder.Entity<User>().Navigation(x => x.Image).AutoInclude();
+    modelBuilder.Entity<User>().Navigation(x => x.Image).AutoInclude();
+
 	}
 
 	#region Asset

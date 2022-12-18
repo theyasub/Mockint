@@ -12,14 +12,15 @@ public class User : Auditable
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public string UserName { get; set; }
+    public string Username { get; set; }
     public string Gmail { get; set; }
 
     [JsonIgnore]
     public string Password { get; set; }
     public Role Role { get; set; }
     public bool IsEmailVerified { get; set; }
-    public Guid Salt { get; set; }
+
+    public Guid Salt { get; set; } = Guid.NewGuid();
 
     public int ImageId { get; set; }
     public Asset Image { get; set; }
