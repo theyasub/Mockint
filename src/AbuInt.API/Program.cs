@@ -1,8 +1,10 @@
 using AbuInt.API.Extensions;
+using AbuInt.API.Helpers;
 using AbuInt.API.Middlewares;
 using AbuInt.Data.DbContexts;
 using AbuInt.Service.Extensions;
 using AbuInt.Service.Helpers;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Serilog;
@@ -40,11 +42,21 @@ builder.Logging.AddSerilog(logger);
 builder.Services.AddJwtService(builder.Configuration);
 // Setup Swagger
 builder.Services.AddSwaggerService();
+
 // Add Custome Service
 builder.Services.AddCustomServices();
 builder.Services.AddHttpContextAccessor();
 EnvironmentHelper.WebRootPath = builder.Environment.WebRootPath;
+
+//Convert  Api url name to dash case 
+builder.Services.AddControllers(options =>
+{
+    options.Conventions.Add(new RouteTokenTransformerConvention(
+        new ConfigureApiUrlName()));
+});
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
