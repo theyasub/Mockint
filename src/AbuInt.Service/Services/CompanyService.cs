@@ -149,7 +149,7 @@ public class CompanyService : ICompanyService
 
             existCompany.ImageId = newAsset.Id;
         }
-
+        existCompany.Update();
         existCompany = await unitOfWork.Companies.UpdateAsync(existCompany);
 
         await unitOfWork.SaveChangesAsync();

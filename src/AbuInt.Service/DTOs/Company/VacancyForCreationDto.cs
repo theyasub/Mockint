@@ -7,17 +7,17 @@ namespace AbuInt.Service.DTOs.Company;
 public class VacancyForCreationDto
 {
     [Required]
-    public CompanyCreationDto CompanyCreationDto { get; set; }
+    public int CompanyId { get; set; }
     
     [Required]
-    public UserForCreationDto UserForCreationDto { get; set; }
+    public int HRId { get; set; }
     
     [Required]
     public Degree Degree { get; set; }
     
     [Required]
     public string Description { get; set; }
-    public double price { get; set; }
+    public double Price { get; set; }
     
     [Required]
     public JobLocationType JobLocationType { get; set; }
