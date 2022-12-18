@@ -86,7 +86,7 @@ public class CompanyService : ICompanyService
         return isSuccessfullyDeleted;
     }
 
-    public async ValueTask<IEnumerable<Company>> GetAllAsync(PaginationParams @params, Expression<Func<Company, bool>> expression, string searchText = null)
+    public async ValueTask<IEnumerable<Company>> GetAllAsync(PaginationParams @params, Expression<Func<Company, bool>> expression = null, string searchText = null)
     {
         IQueryable<Company> filteredCompanies = unitOfWork.Companies.GetAll(expression, isTracking: false);
 

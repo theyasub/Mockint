@@ -28,7 +28,7 @@ public interface ICompanyService
     /// <param name="expression"></param>
     /// <param name="searchText"></param>
     /// <returns></returns>
-    public ValueTask<IEnumerable<Company>> GetAllAsync(PaginationParams @params, Expression<Func<Company, bool>> expression, string searchText = null);
+    public ValueTask<IEnumerable<Company>> GetAllAsync(PaginationParams @params, Expression<Func<Company, bool>> expression = null, string searchText = null);
 
     /// <summary>
     /// Update company
