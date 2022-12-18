@@ -34,9 +34,6 @@ public class CompanyService : ICompanyService
         if (existCompany is not null)
             throw new CustomException(400, "This Company is already exist");
 
-        if (HttpContextHelper.UserRole != Enum.GetName(typeof(Role), Role.Admin))
-            throw new CustomException(403, "Permission denyed for creating a new company");
-
         Company newCompanyData = companyCreationDto.Adapt<Company>();
 
         if (companyCreationDto.Image is not null)
@@ -118,9 +115,6 @@ public class CompanyService : ICompanyService
 
         if (newCompanyChecking is not null)
             throw new CustomException(400, "This Company is already exist");
-
-        if (HttpContextHelper.UserRole != Enum.GetName(typeof(Role), Role.Admin))
-            throw new CustomException(403, "Permission denyed for creating a new company");
 
         if (existCompany.ImageId is not null && companyCreationDto.Image is not null)
         {

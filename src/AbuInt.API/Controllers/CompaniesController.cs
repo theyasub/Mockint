@@ -37,7 +37,7 @@ public class CompaniesController : RESTFulController
     /// <param name="dto"></param>
     /// <returns></returns>
     [HttpPut("{id:int}")]
-    public async ValueTask<ActionResult<Company>> UpdateAsync([FromRoute] int id, CompanyCreationDto dto)
+    public async ValueTask<ActionResult<Company>> UpdateAsync([FromRoute] int id, [FromForm]CompanyCreationDto dto)
         => Ok(await companyService.UpdateAsync(id, dto));
 
     /// <summary>
