@@ -24,7 +24,7 @@ public class AuthService : IAuthService
     public async ValueTask<string> GenerateToken(string username, string password)
     {
         User user = await this.unitOfWork.Users.GetAsync(user =>
-            user.UserName.Equals(username) || user.Gmail.Equals(username));
+            user.Username.Equals(username) || user.Gmail.Equals(username));
 
 
         if (user == null)

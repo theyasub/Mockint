@@ -104,7 +104,7 @@ public class AccountService : IAccountService
         if (user.IsEmailVerified is false)
             throw new CustomException(400, "Gmail did not verified!");
 
-        var changedPassword = SecurityService.Encrypt(userForResertPasswordDto.Password, user.Salt);
+        var changedPassword = SecurityService.Encrypt(userForResertPasswordDto.Password, user.Salt.ToString());
 
         user.Password = changedPassword;
 
