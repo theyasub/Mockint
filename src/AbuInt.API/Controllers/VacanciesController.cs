@@ -2,7 +2,6 @@
 using AbuInt.Domain.Entities.Companies;
 using AbuInt.Service.DTOs.Company;
 using AbuInt.Service.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RESTFulSense.Controllers;
 
@@ -10,7 +9,6 @@ namespace AbuInt.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class VacanciesController : RESTFulController
     {
         public IVacancyService vacancyService { get; set; }

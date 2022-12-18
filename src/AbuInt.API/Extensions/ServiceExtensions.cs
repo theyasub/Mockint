@@ -21,19 +21,15 @@ public static class ServiceExtensions
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IAccountService, AccountService>();
+        services.AddScoped<FIleHelper>();
+        services.AddScoped<IMemoryCache, MemoryCache>();
+        services.AddScoped<EmailHelper>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IExperienceService, ExperienceService>();
         services.AddScoped<IVacancyService, VacancyService>();
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<ICompanyService, CompanyService>();
         services.AddScoped<ICacheService, CacheService>();
-        services.AddScoped<IChatService, ChatService>();
-        services.AddScoped<IMessageService, MessageService>();
-        services.AddScoped<IUserDetailsService, UserDetailsService>();
-        services.AddScoped<FIleHelper>();
-        services.AddScoped<IMemoryCache, MemoryCache>();
-        services.AddScoped<EmailHelper>();
-        services.AddScoped<IStreamService, StreamService>();
     }
     #endregion
 
@@ -70,10 +66,6 @@ public static class ServiceExtensions
     {
         services.AddSwaggerGen(c =>
         {
-            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-            c.IncludeXmlComments(xmlPath);
-
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "AbuInt.Api", Version = "v1" });
             var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 

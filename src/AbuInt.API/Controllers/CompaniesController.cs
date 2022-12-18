@@ -1,5 +1,6 @@
 ﻿using AbuInt.Domain.Configuration;
 using AbuInt.Domain.Entities.Companies;
+using AbuInt.Domain.Entities.Users;
 using AbuInt.Service.DTOs.Company;
 using AbuInt.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -66,7 +67,7 @@ public class CompaniesController : RESTFulController
     /// <returns></returns>
     [HttpGet]
     [AllowAnonymous]
-    public async ValueTask<ActionResult<Company>> GetAll(
+    public async ValueTask<ActionResult<User>> GetAll(
             [FromQuery] PaginationParams @params, string search)
         => Ok(await this.companyService.GetAllAsync(@params, searchText: search));
 }

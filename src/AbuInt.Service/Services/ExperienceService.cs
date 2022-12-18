@@ -49,7 +49,7 @@ public class ExperienceService : IExperienceService
 
     public async ValueTask<IEnumerable<Experience>> GetAllAsync(PaginationParams @params, Expression<Func<Experience, bool>> expression = null, string search = null)
     {
-        var experiance = this.unitOfWork.Experiences.GetAll(expression,new []{"User"}, isTracking: false);
+        var experiance = this.unitOfWork.Experiences.GetAll(expression, isTracking: false);
 
         if (search is not null)
             experiance = experiance.Where(ex => ex.CompanyName == search);

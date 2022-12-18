@@ -15,6 +15,7 @@ public interface IUnitOfWork : IDisposable
 
     #region Companies
     public IRepository<Company> Companies { get; }
+    public IRepository<Interview> Interviews { get; }
     public IRepository<Vacancy> Vacancies { get; }
     #endregion
 
@@ -30,13 +31,6 @@ public interface IUnitOfWork : IDisposable
     public IRepository<Quize> Quizes { get; }
     public IRepository<QuizeResult> QuizeResults { get; }
     #endregion
-
-    #region Chats
-    IRepository<Message> Messages { get; }
-    IRepository<Participant> Participants { get; }
-    IRepository<Interview> Interviews { get; }
-    IRepository<Room> Rooms { get; }
-    #endregion 
 
     public AbuIntDbContext DbContext { get; }
 
