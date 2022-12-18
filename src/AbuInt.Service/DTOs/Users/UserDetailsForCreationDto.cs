@@ -14,7 +14,7 @@ public class UserDetailsForCreationDto
     [Required(ErrorMessage = "Deggre is required")]
     public Degree Degree { get; set; } = Degree.Junior;
     
-    [Required(ErrorMessage = "Image is required")]
+    
     [DataType(DataType.Upload)]
     [System.ComponentModel.Bindable(true)]
     public IFormFile Resume { get; set; } = null!;

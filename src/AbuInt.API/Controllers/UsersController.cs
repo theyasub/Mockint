@@ -10,10 +10,10 @@ namespace AbuInt.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : RESTFulController
+    public class UsersController : RESTFulController
     {
         public IUserService userService { get; set; }
-        public UserController(IUserService userService)
+        public UsersController(IUserService userService)
         {
             this.userService = userService;
         }
@@ -24,7 +24,7 @@ namespace AbuInt.API.Controllers
         /// <param name="userForCreationDto"></param>
         /// <returns></returns>
         [HttpPost]
-        public async ValueTask<ActionResult<User>> CreateAsync(UserForCreationDto userForCreationDto)
+        public async ValueTask<ActionResult<User>> CreateAsync([FromForm] UserForCreationDto userForCreationDto)
             => Ok(await this.userService.CreateAsync(userForCreationDto));
 
         /// <summary>

@@ -28,11 +28,13 @@ public class UserService : IUserService
             throw new CustomException(404, "User alredy exists");
 
         user = userForCreationDto.Adapt<User>();
+
+        var result = await this.unitOfWork.Users.CreateAsync(user);
         user.Create();
 
         await this.unitOfWork.SaveChangesAsync();
 
-        return user;
+        return result;
     }
 
     public async ValueTask<bool> DeleteAsync(Expression<Func<User, bool>> expression)

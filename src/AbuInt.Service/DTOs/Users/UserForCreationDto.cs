@@ -21,14 +21,9 @@ public class UserForCreationDto
     
     [Required(ErrorMessage = "Password is required"),DataType(DataType.Password)]
     public string Password { get; set; } = string.Empty;
-
-    [Required(ErrorMessage = "Choose Role")]
-    public Role Role { get; set; } = Role.User;
     
     [Required(ErrorMessage = "Image is required")]
     [DataType(DataType.Upload)]
     [System.ComponentModel.Bindable(true)]
     public IFormFile Image { get; set; } = null!;
-    
-    public UserDetailsForCreationDto? UserDetailsForCreationDto { get; set; }
 }
