@@ -36,6 +36,8 @@ builder.Logging.AddSerilog(logger);
 builder.Services.AddJwtService(builder.Configuration);
 // Setup Swagger
 builder.Services.AddSwaggerService();
+// Add Custome Service
+builder.Services.AddCustomServices();
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
