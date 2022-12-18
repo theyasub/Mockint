@@ -2,6 +2,7 @@ using AbuInt.Domain.Configuration;
 using AbuInt.Domain.Entities.Users;
 using AbuInt.Service.DTOs.Users;
 using AbuInt.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RESTFulSense.Controllers;
 
@@ -9,6 +10,7 @@ namespace AbuInt.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class ExperienceController : RESTFulController
 {
     private readonly IExperienceService experienceService;
