@@ -16,7 +16,16 @@ public class AccountService : IAccountService
     private readonly FIleHelper fileHelper;
     private readonly ICacheService cacheService;
     private readonly EmailHelper emailHelper;
+<<<<<<< HEAD
     public AccountService(IUnitOfWork unitOfWork, FIleHelper fileHelper, ICacheService cacheService, EmailHelper emailHelper, IAuthService authService)
+=======
+    public AccountService(
+        IUnitOfWork unitOfWork,
+        FIleHelper fileHelper,
+        IMemoryCache memoryCache,
+        EmailHelper emailHelper,
+        IAuthService authService)
+>>>>>>> 26bcaa35a942b2a53935fb90b5797b0cf08da3b3
     {
         this.unitOfWork = unitOfWork;
         this.fileHelper = fileHelper;
@@ -25,22 +34,9 @@ public class AccountService : IAccountService
         this.authService = authService;
     }
 
-    /// <summary>
-    /// UserLoginAsync is a service that handles the process of logging a user into the system.
-    /// It accepts a UserForLoginDto object as input, which contains the user's Gmail address and password.
-    /// </summary>
-    /// <param name="userForLoginDto"></param>
-    /// <returns></returns>
-    public async ValueTask<string> UserLoginAsync(UserForLoginDto userForLoginDto) => 
+    public async ValueTask<string> UserLogInAsync(UserForLoginDto userForLoginDto) => 
         await authService.GenerateToken(userForLoginDto.Gmail, userForLoginDto.Password);
 
-    /// <summary>
-    /// VerifyEmailAsync is a service that handles the process of verifying the email address of a user.
-    /// It accepts an EmailVerify object as input, which contains the user's Gmail address and a code that was sent to their email.
-    /// </summary>
-    /// <param name="emailVerify"></param>
-    /// <returns></returns>
-    /// <exception cref="CustomException"></exception>
     public async ValueTask<bool> VerifyEmailAsync(EmailVerify emailVerify)
     {
         var entity = await unitOfWork.Users.GetAsync(user => user.Gmail == emailVerify.Gmail);
@@ -56,22 +52,13 @@ public class AccountService : IAccountService
             entity.IsEmailVerified = true;
 
             await unitOfWork.Users.UpdateAsync(entity);
-
             await unitOfWork.SaveChangesAsync();
 
             return true;
         }
-        
         throw new CustomException(400, "Code is expired");
-        
-
     }
 
-    /// <summary>
-    /// SendCodeAsync is a service that handles the process of sending a verification code to a user's email address
-    /// . It accepts a SentToEmail object as input, which contains the user's email address
-    /// </summary>
-    /// <param name="sentToEmail"></param>
     public async ValueTask SendCodeAsync(SentToEmail sentToEmail)
     {
         int code = new Random().Next(1000, 9999);
@@ -88,13 +75,6 @@ public class AccountService : IAccountService
         await emailHelper.SendAsync(message);
     }
 
-    /// <summary>
-    /// VerifyPasswordAsync is a service that handles the process of resetting a user's password.
-    /// It accepts a UserForResetPasswordDto object as input, which contains the user's email address and the new password they want to set
-    /// </summary>
-    /// <param name="userForResertPasswordDto"></param>
-    /// <returns></returns>
-    /// <exception cref="CustomException"></exception>
     public async ValueTask<bool> VerifyPasswordAsync(UserForResertPasswordDto userForResertPasswordDto)
     {
         var user = await unitOfWork.Users.GetAsync(p => p.Gmail == userForResertPasswordDto.Email);

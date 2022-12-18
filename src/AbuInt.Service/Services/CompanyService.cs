@@ -47,7 +47,6 @@ public class CompanyService : ICompanyService
             };
 
             newAsset.Create();
-
             newAsset = await unitOfWork.Assets.CreateAsync(newAsset);
 
             newCompanyData.ImageId = newAsset.Id;
@@ -77,7 +76,6 @@ public class CompanyService : ICompanyService
         }
 
         bool isSuccessfullyDeleted = await unitOfWork.Companies.DeleteAsync(expression);
-        
         await unitOfWork.SaveChangesAsync();
 
         return isSuccessfullyDeleted;
@@ -145,7 +143,6 @@ public class CompanyService : ICompanyService
         }
         existCompany.Update();
         existCompany = await unitOfWork.Companies.UpdateAsync(existCompany);
-
         await unitOfWork.SaveChangesAsync();
 
         return existCompany;
