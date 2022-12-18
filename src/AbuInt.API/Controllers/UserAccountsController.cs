@@ -1,4 +1,3 @@
-using AbuInt.Domain.Entities.Users;
 using AbuInt.Service.DTOs.Users;
 using AbuInt.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -24,7 +23,7 @@ public class UserAccountsController : RESTFulController
     /// <returns></returns>
     [HttpPost("login"), AllowAnonymous]
     public async Task<IActionResult> LogInAsync([FromForm] UserForLoginDto viewModel)
-        => Ok(new { Token = await accountService.UserLoginAsync(viewModel) });
+        => Ok(new { Token = await accountService.UserLogInAsync(viewModel) });
 
     /// <summary>
     /// Verify exist email

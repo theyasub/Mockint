@@ -1,6 +1,6 @@
 namespace AbuInt.Service.DTOs.Users;
 
-public class ExpeianceForCreationDto
+public class ExperienceForCreationDto
 {
     public string CompanyName { get; set; }
     public DateTime StartTime { get; set; }

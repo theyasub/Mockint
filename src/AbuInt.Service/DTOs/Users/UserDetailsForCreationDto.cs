@@ -6,7 +6,7 @@ namespace AbuInt.Service.DTOs.Users;
 
 public class UserDetailsForCreationDto
 {
-    public ExpeianceForCreationDto ExpeianceForCreationDto { get; set; }
+    public ExperienceForCreationDto ExpeianceForCreationDto { get; set; }
     
     [Required(ErrorMessage = "Phonenumber is required")]
     public string PhoneNumber { get; set; }

@@ -26,7 +26,6 @@ builder.Services.AddDbContext<AbuIntDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-
 // Add authentication
 builder.Services.AddAuthorization();
 

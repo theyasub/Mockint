@@ -25,6 +25,8 @@ public static class ServiceExtensions
         services.AddScoped<IMemoryCache, MemoryCache>();
         services.AddScoped<EmailHelper>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IExperienceService, ExperienceService>();
+        services.AddScoped<IVacancyService, VacancyService>();
     }
     #endregion
 
@@ -52,7 +54,6 @@ public static class ServiceExtensions
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = jwtSettings.GetSection("Issuer").Value,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
-
             };
         });
     }
