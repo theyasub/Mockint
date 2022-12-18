@@ -14,13 +14,13 @@ public class AccountService : IAccountService
     private readonly IUnitOfWork unitOfWork;
     private readonly IAuthService authService;
     private readonly FIleHelper fileHelper;
-    private readonly IMemoryCache memoryCache;
+    private readonly ICacheService cacheService;
     private readonly EmailHelper emailHelper;
-    public AccountService(IUnitOfWork unitOfWork, FIleHelper fileHelper, IMemoryCache memoryCache, EmailHelper emailHelper, IAuthService authService)
+    public AccountService(IUnitOfWork unitOfWork, FIleHelper fileHelper, ICacheService cacheService, EmailHelper emailHelper, IAuthService authService)
     {
         this.unitOfWork = unitOfWork;
         this.fileHelper = fileHelper;
-        this.memoryCache = memoryCache;
+        this.cacheService = cacheService;
         this.emailHelper = emailHelper;
         this.authService = authService;
     }
@@ -48,9 +48,9 @@ public class AccountService : IAccountService
         if (entity is null)
             throw new CustomException(404, "User not found");
 
-        if (memoryCache.TryGetValue(emailVerify.Gmail, out int exceptedCode))
+        if (cacheService.GetData<int>(emailVerify.Gmail) > 999)
         {
-            if (exceptedCode != emailVerify.Code)
+            if (cacheService.GetData<int>(emailVerify.Gmail) != emailVerify.Code)
                 throw new CustomException(400, "Code is wrong");
 
             entity.IsEmailVerified = true;
@@ -76,7 +76,8 @@ public class AccountService : IAccountService
     {
         int code = new Random().Next(1000, 9999);
 
-        memoryCache.Set(sentToEmail.Email, code, TimeSpan.FromMinutes(10));
+        cacheService.SetData(sentToEmail.Email, code, TimeSpan.FromMinutes(10));
+
 
         var message = new EmailMessage()
         {

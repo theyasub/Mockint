@@ -26,13 +26,15 @@ public static class ServiceExtensions
         services.AddScoped<IMemoryCache, MemoryCache>();
         services.AddScoped<EmailHelper>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IAccountService, AccountService>();
+        services.AddScoped<ICompanyService, CompanyService>();
+        services.AddScoped<ICacheService, CacheService>();
     }
     #endregion
 
     #region Jwt Service
     public static void AddJwtService(this IServiceCollection services, IConfiguration config)
     {
-
         var jwtSettings = config.GetSection("Jwt");
 
         string key = jwtSettings.GetSection("Key").Value;

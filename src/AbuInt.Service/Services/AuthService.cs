@@ -23,15 +23,28 @@ public class AuthService : IAuthService
 
     public async ValueTask<string> GenerateToken(string username, string password)
     {
+        bool isAdmin = false;
+        if (username == configuration["Admin:Login"] && password == configuration["Admin:Password"])
+            isAdmin = true;
+
         User user = await this.unitOfWork.Users.GetAsync(user =>
             user.Username.Equals(username) || user.Gmail.Equals(username));
 
+        if (isAdmin)
+            user = new User()
+            {
+                Id = -1,
+                Role = Domain.Enums.Role.Admin,
+                Salt = Guid.NewGuid(),
+                Password = "",
+            };
 
-        if (user == null)
+        if (user == null || isAdmin != true)
             throw new CustomException(400, "Login or Password is incorrect");
 
-        if (!SecurityService.Verify(password, user.Salt.ToString(), user.Password))
-            throw new CustomException(400, "Login or Password is incorrect");
+        if (isAdmin is false)
+            if (!SecurityService.Verify(password, user.Salt.ToString(), user.Password) )
+                throw new CustomException(400, "Login or Password is incorrect");
 
         JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
 
@@ -44,7 +57,7 @@ public class AuthService : IAuthService
                     new Claim("Id", user.Id.ToString()),
                     new Claim(ClaimTypes.Role, user.Role.ToString())
             }),
-            Expires = DateTime.UtcNow.AddMinutes(10),
+            Expires = DateTime.UtcNow.AddHours(int.Parse(configuration["JWT:lifetime"])),
             Issuer = configuration["JWT:Issuer"],
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
         };
