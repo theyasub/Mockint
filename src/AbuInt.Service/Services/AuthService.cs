@@ -1,4 +1,4 @@
-﻿using AbuInt.Data.IRepositories;
+using AbuInt.Data.IRepositories;
 using AbuInt.Domain.Entities.Users;
 using AbuInt.Service.Exceptions;
 using AbuInt.Service.Helpers;
@@ -25,6 +25,7 @@ public class AuthService : IAuthService
     {
         User user = await this.unitOfWork.Users.GetAsync(user =>
             user.UserName.Equals(username) || user.Gmail.Equals(username));
+
 
         if (user == null)
             throw new CustomException(400, "Login or Password is incorrect");

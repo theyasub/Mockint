@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using AbuInt.Data.IRepositories;
+using AbuInt.Data.Repositories;
+using AbuInt.Service.Interfaces.Users;
+using AbuInt.Service.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -9,6 +13,15 @@ namespace AbuInt.API.Extensions;
 
 public static class ServiceExtensions
 {
+    #region Add service
+    public static void AddCustomServices(this IServiceCollection services)
+    {
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IUserService, UserService>();
+    }
+    #endregion
+
+    #region Jwt Service
     public static void AddJwtService(this IServiceCollection services, IConfiguration config)
     {
 
@@ -36,7 +49,9 @@ public static class ServiceExtensions
             };
         });
     }
+    #endregion
 
+    #region Setup Swagger
     public static void AddSwaggerService(this IServiceCollection services)
     {
         services.AddSwaggerGen(c =>
@@ -70,4 +85,5 @@ public static class ServiceExtensions
             });
         });
     }
+    #endregion
 }

@@ -26,7 +26,6 @@ public class AbuIntDbContext : DbContext
 			.HasOne(x => x.User)
 			.WithMany(x => x.Vacancies)
 			.OnDelete(DeleteBehavior.NoAction);
-
 	}
 
 	#region Asset
