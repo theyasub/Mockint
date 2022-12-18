@@ -33,6 +33,7 @@ public static class ServiceExtensions
         services.AddScoped<FIleHelper>();
         services.AddScoped<IMemoryCache, MemoryCache>();
         services.AddScoped<EmailHelper>();
+        services.AddScoped<IStreamService, StreamService>();
     }
     #endregion
 
