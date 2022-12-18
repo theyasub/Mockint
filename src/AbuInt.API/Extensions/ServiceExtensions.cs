@@ -68,6 +68,10 @@ public static class ServiceExtensions
     {
         services.AddSwaggerGen(c =>
         {
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            c.IncludeXmlComments(xmlPath);
+
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "AbuInt.Api", Version = "v1" });
             var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 
