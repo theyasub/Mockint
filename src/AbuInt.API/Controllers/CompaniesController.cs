@@ -55,6 +55,7 @@ public class CompaniesController : RESTFulController
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id:int}")]
+    [AllowAnonymous]
     public async ValueTask<ActionResult<Company>> GetAsync([FromRoute] int id)
         => Ok(await companyService.GetAsync(c => c.Id == id));
 
@@ -65,6 +66,7 @@ public class CompaniesController : RESTFulController
     /// <param name="search"></param>
     /// <returns></returns>
     [HttpGet]
+    [AllowAnonymous]
     public async ValueTask<ActionResult<User>> GetAll(
             [FromQuery] PaginationParams @params, string search)
         => Ok(await this.companyService.GetAllAsync(@params, searchText: search));
