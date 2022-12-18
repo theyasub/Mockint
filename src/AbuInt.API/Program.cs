@@ -39,7 +39,7 @@ builder.Services.AddSwaggerService();
 // Add Custome Service
 builder.Services.AddCustomServices();
 builder.Services.AddHttpContextAccessor();
-
+EnvironmentHelper.WebRootPath = builder.Environment.WebRootPath;
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -51,7 +51,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 
-    EnvironmentHelper.WebRootPath = app.Services.GetRequiredService<IWebHostEnvironment>()?.WebRootPath;
+EnvironmentHelper.WebRootPath = app.Services.GetRequiredService<IWebHostEnvironment>()?.WebRootPath;
 
 if (app.Services.GetService<IHttpContextAccessor>() != null)
     HttpContextHelper.Accessor = app.Services.GetRequiredService<IHttpContextAccessor>();
