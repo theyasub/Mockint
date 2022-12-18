@@ -23,4 +23,8 @@
     <ProjectReference Include="..\AbuInt.Service\AbuInt.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>
