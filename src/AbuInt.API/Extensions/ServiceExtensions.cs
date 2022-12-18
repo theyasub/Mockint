@@ -21,9 +21,6 @@ public static class ServiceExtensions
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IAccountService, AccountService>();
-        services.AddScoped<FIleHelper>();
-        services.AddScoped<IMemoryCache, MemoryCache>();
-        services.AddScoped<EmailHelper>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IExperienceService, ExperienceService>();
         services.AddScoped<IVacancyService, VacancyService>();
@@ -32,6 +29,10 @@ public static class ServiceExtensions
         services.AddScoped<ICacheService, CacheService>();
         services.AddScoped<IChatService, ChatService>();
         services.AddScoped<IMessageService, MessageService>();
+        services.AddScoped<IUserDetailsService, UserDetailsService>();
+        services.AddScoped<FIleHelper>();
+        services.AddScoped<IMemoryCache, MemoryCache>();
+        services.AddScoped<EmailHelper>();
     }
     #endregion
 
