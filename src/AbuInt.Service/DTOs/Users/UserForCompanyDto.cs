@@ -1,10 +1,12 @@
+﻿using AbuInt.Domain.Enums;
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace AbuInt.Service.DTOs.Users;
 
-public class UserForCreationDto
+public class UserForCompanyDto
 {
+
     [Required(ErrorMessage = "FirstName is required")]
     public string FirstName { get; set; } = string.Empty;
 
@@ -21,8 +23,13 @@ public class UserForCreationDto
     [Required(ErrorMessage = "Password is required"), DataType(DataType.Password)]
     public string Password { get; set; } = string.Empty;
 
+    [Required]
+    public CompanyUser Role { get; set; }
+
     [Required(ErrorMessage = "Image is required")]
     [DataType(DataType.Upload)]
     [System.ComponentModel.Bindable(true)]
     public IFormFile Image { get; set; } = null!;
+
+    public UserDetailsForCreationDto Details { get; set; } = null!;
 }

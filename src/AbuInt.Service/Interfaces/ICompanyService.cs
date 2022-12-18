@@ -1,6 +1,6 @@
 ﻿using AbuInt.Domain.Configuration;
 using AbuInt.Domain.Entities.Companies;
-using AbuInt.Service.DTOs.Company;
+using AbuInt.Service.DTOs.Companies;
 using System.Linq.Expressions;
 
 namespace AbuInt.Service.Interfaces;

@@ -1,6 +1,5 @@
 using AbuInt.Domain.Commons;
 using AbuInt.Domain.Entities.Commons;
-using AbuInt.Domain.Entities.Users;
 
 namespace AbuInt.Domain.Entities.Companies;
 

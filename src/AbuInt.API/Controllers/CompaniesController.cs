@@ -1,7 +1,7 @@
 ﻿using AbuInt.Domain.Configuration;
 using AbuInt.Domain.Entities.Companies;
 using AbuInt.Domain.Entities.Users;
-using AbuInt.Service.DTOs.Company;
+using AbuInt.Service.DTOs.Companies;
 using AbuInt.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +37,7 @@ public class CompaniesController : RESTFulController
     /// <param name="dto"></param>
     /// <returns></returns>
     [HttpPut("{id:int}")]
-    public async ValueTask<ActionResult<Company>> UpdateAsync([FromRoute] int id, [FromForm]CompanyCreationDto dto)
+    public async ValueTask<ActionResult<Company>> UpdateAsync([FromRoute] int id, [FromForm] CompanyCreationDto dto)
         => Ok(await companyService.UpdateAsync(id, dto));
 
     /// <summary>

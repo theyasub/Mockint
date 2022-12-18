@@ -2,7 +2,6 @@
 using AbuInt.Domain.Configuration;
 using AbuInt.Domain.Entities.Commons;
 using AbuInt.Domain.Entities.Users;
-using AbuInt.Service.DTOs.Company;
 using AbuInt.Service.DTOs.Users;
 using AbuInt.Service.Exceptions;
 using AbuInt.Service.Extensions;
@@ -59,6 +58,41 @@ public class UserService : IUserService
         return result;
     }
 
+    public async ValueTask<User> CreateAsync(UserForCompanyDto userForCompanyDto)
+    {
+        User user = await this.unitOfWork.Users.GetAsync(user =>
+               user.Username.Equals(userForCompanyDto.Username));
+
+        if (user is not null)
+            throw new CustomException(400, "User alredy exists");
+
+        user = userForCompanyDto.Adapt<User>();
+        user.Password = SecurityService.Encrypt(userForCompanyDto.Password, user.Salt.ToString());
+        if (userForCompanyDto.Image is not null)
+        {
+            var attachmentData = await fileHelper.SaveAsync(userForCompanyDto.Image);
+
+            Asset newAsset = new Asset()
+            {
+                Name = attachmentData.fileName,
+                Path = attachmentData.filePath
+            };
+
+            newAsset.Create();
+
+            newAsset = await unitOfWork.Assets.CreateAsync(newAsset);
+            await unitOfWork.SaveChangesAsync();
+
+            user.ImageId = newAsset.Id;
+        }
+
+        user.Create();
+        var result = await this.unitOfWork.Users.CreateAsync(user);
+        await this.unitOfWork.SaveChangesAsync();
+
+        return result;
+    }
+
     public async ValueTask<bool> DeleteAsync(Expression<Func<User, bool>> expression)
     {
         User user = await this.unitOfWork.Users.GetAsync(expression);
@@ -73,7 +107,7 @@ public class UserService : IUserService
     }
 
     public async ValueTask<IEnumerable<User>> GetAllAsync(
-        PaginationParams @params, 
+        PaginationParams @params,
         Expression<Func<User, bool>> expression = null,
         string search = null)
     {
@@ -83,7 +117,7 @@ public class UserService : IUserService
             await users.Where(user => user.FirstName == search ||
                        user.LastName == search)
                        .ToPagedList(@params).ToListAsync();
-        
+
         return await users.ToPagedList(@params).ToListAsync();
     }
 
@@ -102,7 +136,7 @@ public class UserService : IUserService
 
     public async ValueTask<User> UpdateAsync(int id, UserForCreationDto userForCreationDto)
     {
-        User user = await this.unitOfWork.Users.GetAsync(user => user.Id.Equals(id));    
+        User user = await this.unitOfWork.Users.GetAsync(user => user.Id.Equals(id));
 
         if (user is null)
             throw new CustomException(404, "User not found");

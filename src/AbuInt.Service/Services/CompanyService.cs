@@ -2,15 +2,13 @@
 using AbuInt.Domain.Configuration;
 using AbuInt.Domain.Entities.Commons;
 using AbuInt.Domain.Entities.Companies;
-using AbuInt.Domain.Enums;
-using AbuInt.Service.DTOs.Company;
+using AbuInt.Service.DTOs.Companies;
 using AbuInt.Service.Exceptions;
 using AbuInt.Service.Extensions;
 using AbuInt.Service.Helpers;
 using AbuInt.Service.Interfaces;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using System.Linq.Expressions;
 
 namespace AbuInt.Service.Services;

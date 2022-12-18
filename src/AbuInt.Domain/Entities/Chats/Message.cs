@@ -10,6 +10,6 @@ public class Message : Auditable
 
     public int RoomId { get; set; }
     public virtual Room Room { get; set; }
-    
+
     public string Content { get; set; }
 }

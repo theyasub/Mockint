@@ -1,4 +1,3 @@
-using System.Linq.Expressions;
 using AbuInt.Data.IRepositories;
 using AbuInt.Domain.Configuration;
 using AbuInt.Domain.Entities.Users;
@@ -6,9 +5,9 @@ using AbuInt.Service.DTOs.Users;
 using AbuInt.Service.Exceptions;
 using AbuInt.Service.Extensions;
 using AbuInt.Service.Interfaces;
-using AbuInt.Service.Interfaces.Users;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace AbuInt.Service.Services;
 
@@ -30,7 +29,7 @@ public class UserDetailsService : IUserDetailsService
             throw new CustomException(400, "This User Details already Exists");
 
         userDetail = userDetailsForCreationDto.Adapt<UserDetail>();
-        
+
         userDetail.Create();
         var res = await this.unitOfWork.UserDetails.CreateAsync(userDetail);
         await unitOfWork.SaveChangesAsync();

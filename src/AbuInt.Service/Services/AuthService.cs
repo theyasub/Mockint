@@ -43,7 +43,7 @@ public class AuthService : IAuthService
             throw new CustomException(400, "Login or Password is incorrect");
 
         if (isAdmin is false)
-            if (!SecurityService.Verify(password, user.Salt.ToString(), user.Password) )
+            if (!SecurityService.Verify(password, user.Salt.ToString(), user.Password))
                 throw new CustomException(400, "Login or Password is incorrect");
 
         JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();

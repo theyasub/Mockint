@@ -61,9 +61,9 @@ public class UnitOfWork : IUnitOfWork
         Quizes = new Repository<Quize>(dbContext);
         QuizeResults = new Repository<QuizeResult>(dbContext);
         #endregion
-}
+    }
 
-public void Dispose() 
+    public void Dispose()
     {
         GC.SuppressFinalize(this);
     }

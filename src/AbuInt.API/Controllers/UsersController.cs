@@ -2,7 +2,6 @@
 using AbuInt.Domain.Entities.Users;
 using AbuInt.Service.DTOs.Users;
 using AbuInt.Service.Interfaces.Users;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RESTFulSense.Controllers;
 
@@ -28,6 +27,15 @@ namespace AbuInt.API.Controllers
             => Ok(await this.userService.CreateAsync(userForCreationDto));
 
         /// <summary>
+        /// Create member of company
+        /// </summary>
+        /// <param name="userForCompanyDto"></param>
+        /// <returns></returns>
+        [HttpPost("company-member")]
+        public async ValueTask<ActionResult<User>> CreateAsync([FromForm] UserForCompanyDto userForCompanyDto)
+            => Ok(await this.userService.CreateAsync(userForCompanyDto));
+
+        /// <summary>
         /// Update user's data
         /// </summary>
         /// <param name="id"></param>
@@ -36,7 +44,6 @@ namespace AbuInt.API.Controllers
         [HttpPut]
         public async ValueTask<ActionResult<User>> UpdateAsync(int id, [FromForm] UserForCreationDto userForCreationDto)
             => Ok(await this.userService.UpdateAsync(id, userForCreationDto));
-
 
         /// <summary>
         /// Delete user with given id

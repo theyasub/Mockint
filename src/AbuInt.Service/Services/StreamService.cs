@@ -1,44 +1,41 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
-using RestSharp;
-using System.Net;
+﻿using AbuInt.Service.DTOs.Meetings;
+using AbuInt.Service.Interfaces;
+using Newtonsoft.Json;
 using System.Text;
+using System.Text.Json;
 
 namespace AbuInt.Service.Services;
 
-public class StreamService
+public class StreamService : IStreamService
 {
-    public void GenerateStream()
+    public async ValueTask<MeetingContent> GenerateStream()
     {
-        var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
-        var now = DateTime.UtcNow;
-        var apiSecret = "Your API secret";
-        byte[] symmetricKey = Encoding.ASCII.GetBytes(apiSecret);
+        string token =
+            "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6ImZqcGd6ZFZRUkxXZ1FYb0FTMXNkLVEiLCJleHAiOjE2NzE5ODEwOTMsImlhdCI6MTY3MTM3NjI5Mn0.1l-ocq8OOtyVtZQ7h6XkdHBjkar_a6oZPwUibc4J5zU";
 
+        using var httpClient = new HttpClient();
+        httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
-        var tokenDescriptor = new SecurityTokenDescriptor
+        string userId = "_TTLPIWiR-GmsD3acapOxw";
+        string url = $"https://api.zoom.us/v2/users/{userId}/meetings";
+
+        var meeting = new Meeting
         {
-            Issuer = "Your API Key",
-            Expires = now.AddSeconds(300),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(symmetricKey), SecurityAlgorithms.HmacSha256),
+            Topic = "Job Interview",
+            Type = 2,
+            StartTime = DateTime.Now,
+            Duration = 30
         };
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        var tokenString = tokenHandler.WriteToken(token);
 
+        var jsonText = JsonConvert.SerializeObject(meeting);
+        var content = new StringContent(jsonText, Encoding.UTF8, mediaType: "application/json");
 
-        var client = new RestClient("https://api.zoom.us/v2/users/{userid}/meetings");
-        var request = new RestRequest(Method.Post.ToString());
-        request.RequestFormat = DataFormat.Json;
-        request.AddJsonBody(new { topic = "Meeting with Dev", duration = "10", start_time = "2021-03-20T05:00:00", type = "2" });
-        request.AddHeader("authorization", String.Format("Bearer {0}", tokenString));
+        var response = await httpClient.PostAsync(url, content);
 
+        var result = await response.Content.ReadAsStringAsync();
 
-        var restResponse = client.Execute(request);
-        HttpStatusCode statusCode = restResponse.StatusCode;
-        int numericStatusCode = (int)statusCode;
-        var jObject = JObject.Parse(restResponse.Content);
-        var e = (string)jObject["start_url"];
-        var a = (string)jObject["join_url"];
-        var r = Convert.ToString(numericStatusCode);
+        var jsonResult = JsonConvert.DeserializeObject<MeetingContent>(result);
+
+        return jsonResult;
     }
 }

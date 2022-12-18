@@ -17,7 +17,7 @@ public class User : Auditable
 
     [JsonIgnore]
     public string Password { get; set; }
-    
+
     public Role Role { get; set; } = Role.User;
 
     public bool IsEmailVerified { get; set; }
@@ -33,7 +33,7 @@ public class User : Auditable
     public virtual UserDetail UserDetail { get; set; }
 
     public virtual ICollection<Participant> Participants { get; set; }
-    public virtual ICollection<Message> Messages { get; set; } 
-    public virtual ICollection<Vacancy> Vacancies { get; set; } 
-    
+    public virtual ICollection<Message> Messages { get; set; }
+    public virtual ICollection<Vacancy> Vacancies { get; set; }
+
 }

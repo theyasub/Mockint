@@ -1,5 +1,4 @@
 ﻿using AbuInt.Domain.Entities.Chats;
-using AbuInt.Service.DTOs.Chats;
 
 namespace AbuInt.Service.Interfaces;
 
