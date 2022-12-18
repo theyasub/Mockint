@@ -34,7 +34,7 @@ namespace AbuInt.API.Controllers
         /// <param name="userForCreationDto"></param>
         /// <returns></returns>
         [HttpPut]
-        public async ValueTask<ActionResult<User>> UpdateAsync(int id, UserForCreationDto userForCreationDto)
+        public async ValueTask<ActionResult<User>> UpdateAsync(int id, [FromForm] UserForCreationDto userForCreationDto)
             => Ok(await this.userService.UpdateAsync(id, userForCreationDto));
 
 
