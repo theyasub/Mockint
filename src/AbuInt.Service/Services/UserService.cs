@@ -49,14 +49,11 @@ public class UserService : IUserService
             newAsset = await unitOfWork.Assets.CreateAsync(newAsset);
             await unitOfWork.SaveChangesAsync();
 
-
             user.ImageId = newAsset.Id;
         }
 
         user.Create();
-        
         var result = await this.unitOfWork.Users.CreateAsync(user);
-
         await this.unitOfWork.SaveChangesAsync();
 
         return result;

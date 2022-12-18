@@ -84,8 +84,8 @@ public class VacancyService : IVacancyService
             throw new CustomException(400, "Hr Speshilist not found");
 
         existVacancy = vacancyCreationDto.Adapt(existVacancy);
-        existVacancy.Update();
 
+        existVacancy.Update();
         existVacancy = await unitOfWork.Vacancies.UpdateAsync(existVacancy);
         await unitOfWork.SaveChangesAsync();
 
