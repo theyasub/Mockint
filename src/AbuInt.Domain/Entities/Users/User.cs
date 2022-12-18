@@ -17,9 +17,12 @@ public class User : Auditable
 
     [JsonIgnore]
     public string Password { get; set; }
+    
     public Role Role { get; set; } = Role.User;
+
     public bool IsEmailVerified { get; set; }
 
+    [JsonIgnore]
     public Guid Salt { get; set; } = Guid.NewGuid();
 
     public int ImageId { get; set; }
