@@ -24,6 +24,10 @@ builder.Services.AddDbContext<AbuIntDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+
+// Add authentication
+builder.Services.AddAuthorization();
+
 // Serilog
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
