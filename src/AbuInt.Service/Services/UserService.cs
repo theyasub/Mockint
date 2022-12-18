@@ -25,7 +25,7 @@ public class UserService : IUserService
             user.Username.Equals(userForCreationDto.Username));
 
         if (user is not null)
-            throw new CustomException(404, "User alredy exists");
+            throw new CustomException(400, "User alredy exists");
 
         user = userForCreationDto.Adapt<User>();
 

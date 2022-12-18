@@ -17,9 +17,9 @@ public class User : Auditable
 
     [JsonIgnore]
     public string Password { get; set; }
-    public Role Role { get; set; }
+    
+    public Role Role { get; set; } = Role.User;
 
-    [JsonIgnore]
     public bool IsEmailVerified { get; set; }
 
     [JsonIgnore]
