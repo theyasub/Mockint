@@ -1,9 +1,9 @@
-﻿using MailKit.Security;
-using Microsoft.Extensions.Configuration;
-using MimeKit.Text;
-using MimeKit;
-using AbuInt.Service.DTOs.Users;
+﻿using AbuInt.Service.DTOs.Users;
 using MailKit.Net.Smtp;
+using MailKit.Security;
+using Microsoft.Extensions.Configuration;
+using MimeKit;
+using MimeKit.Text;
 
 namespace AbuInt.Service.Helpers;
 

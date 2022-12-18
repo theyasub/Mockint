@@ -8,12 +8,7 @@ using AbuInt.Service.Extensions;
 using AbuInt.Service.Interfaces;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AbuInt.Service.Services;
 
@@ -39,10 +34,10 @@ public class VacancyService : IVacancyService
 
         mappedVacancy.Create();
 
-       Vacancy newVacancy = await unitOfWork.Vacancies.CreateAsync(mappedVacancy);
-       await unitOfWork.SaveChangesAsync();
+        Vacancy newVacancy = await unitOfWork.Vacancies.CreateAsync(mappedVacancy);
+        await unitOfWork.SaveChangesAsync();
 
-       return newVacancy;
+        return newVacancy;
     }
 
     public async ValueTask<bool> DeleteAsync(Expression<Func<Vacancy, bool>> expression)

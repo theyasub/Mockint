@@ -2,7 +2,7 @@
 
 namespace AbuInt.Service.Helpers;
 
-public class CacheService : ICacheService 
+public class CacheService : ICacheService
 {
     private readonly IMemoryCache memoryCache;
 
