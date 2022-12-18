@@ -24,7 +24,7 @@ namespace AbuInt.API.Controllers
         /// <param name="userForCreationDto"></param>
         /// <returns></returns>
         [HttpPost]
-        public async ValueTask<ActionResult<User>> CreateAsync(UserForCreationDto userForCreationDto)
+        public async ValueTask<ActionResult<User>> CreateAsync([FromForm] UserForCreationDto userForCreationDto)
             => Ok(await this.userService.CreateAsync(userForCreationDto));
 
         /// <summary>
