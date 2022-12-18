@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AbuInt.Service.Helpers;
 
@@ -12,17 +7,17 @@ public class FIleHelper
     ///<summary>
     /// This method th file save
     ///<summary>
-    public async Task<(string fileName, string filePath )> SaveAsync(IFormFile file, FileType fileType = FileType.Image)
+    public async Task<(string fileName, string filePath)> SaveAsync(IFormFile file, FileType fileType = FileType.Image)
     {
         string fileName = ImageHelper.MakeImageName(file.FileName);
-        
+
         string path;
         string partPath;
         if (fileType == FileType.Image)
         {
             partPath = Path.Combine(EnvironmentHelper.Attachment, fileName);
             path = Path.Combine(EnvironmentHelper.WebRootPath, partPath);
-            
+
             if (!Directory.Exists(EnvironmentHelper.AttachmentPath))
                 Directory.CreateDirectory(EnvironmentHelper.AttachmentPath);
         }
@@ -51,7 +46,7 @@ public class FIleHelper
         string absoluteFilePath;
         if (fileType == FileType.Image)
             absoluteFilePath = Path.Combine(EnvironmentHelper.WebRootPath, relativeImagePath);
-        else 
+        else
             absoluteFilePath = Path.Combine(EnvironmentHelper.WebRootPath, relativeImagePath);
 
         if (!File.Exists(absoluteFilePath)) return Task.FromResult(false);

@@ -2,7 +2,6 @@
 using AbuInt.Domain.Configuration;
 using AbuInt.Domain.Entities.Commons;
 using AbuInt.Domain.Entities.Users;
-using AbuInt.Service.DTOs.Company;
 using AbuInt.Service.DTOs.Users;
 using AbuInt.Service.Exceptions;
 using AbuInt.Service.Extensions;
@@ -73,7 +72,7 @@ public class UserService : IUserService
     }
 
     public async ValueTask<IEnumerable<User>> GetAllAsync(
-        PaginationParams @params, 
+        PaginationParams @params,
         Expression<Func<User, bool>> expression = null,
         string search = null)
     {
@@ -83,7 +82,7 @@ public class UserService : IUserService
             await users.Where(user => user.FirstName == search ||
                        user.LastName == search)
                        .ToPagedList(@params).ToListAsync();
-        
+
         return await users.ToPagedList(@params).ToListAsync();
     }
 
@@ -102,7 +101,7 @@ public class UserService : IUserService
 
     public async ValueTask<User> UpdateAsync(int id, UserForCreationDto userForCreationDto)
     {
-        User user = await this.unitOfWork.Users.GetAsync(user => user.Id.Equals(id));    
+        User user = await this.unitOfWork.Users.GetAsync(user => user.Id.Equals(id));
 
         if (user is null)
             throw new CustomException(404, "User not found");

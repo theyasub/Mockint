@@ -1,4 +1,3 @@
-using System.Net.Mail;
 using AbuInt.Domain.Commons;
 using AbuInt.Domain.Entities.Commons;
 using AbuInt.Domain.Enums;
