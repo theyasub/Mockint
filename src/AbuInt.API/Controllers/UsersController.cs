@@ -2,7 +2,6 @@
 using AbuInt.Domain.Entities.Users;
 using AbuInt.Service.DTOs.Users;
 using AbuInt.Service.Interfaces.Users;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RESTFulSense.Controllers;
 

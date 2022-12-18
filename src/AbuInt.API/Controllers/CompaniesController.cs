@@ -1,6 +1,5 @@
 ﻿using AbuInt.Domain.Configuration;
 using AbuInt.Domain.Entities.Companies;
-using AbuInt.Domain.Entities.Users;
 using AbuInt.Service.DTOs.Company;
 using AbuInt.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -37,7 +36,7 @@ public class CompaniesController : RESTFulController
     /// <param name="dto"></param>
     /// <returns></returns>
     [HttpPut("{id:int}")]
-    public async ValueTask<ActionResult<Company>> UpdateAsync([FromRoute] int id, [FromForm]CompanyCreationDto dto)
+    public async ValueTask<ActionResult<Company>> UpdateAsync([FromRoute] int id, [FromForm] CompanyCreationDto dto)
         => Ok(await companyService.UpdateAsync(id, dto));
 
     /// <summary>
@@ -67,7 +66,7 @@ public class CompaniesController : RESTFulController
     /// <returns></returns>
     [HttpGet]
     [AllowAnonymous]
-    public async ValueTask<ActionResult<User>> GetAll(
+    public async ValueTask<ActionResult<Company>> GetAll(
             [FromQuery] PaginationParams @params, string search)
         => Ok(await this.companyService.GetAllAsync(@params, searchText: search));
 }

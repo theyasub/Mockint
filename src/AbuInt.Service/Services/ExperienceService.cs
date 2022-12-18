@@ -1,4 +1,3 @@
-using System.Linq.Expressions;
 using AbuInt.Data.IRepositories;
 using AbuInt.Domain.Configuration;
 using AbuInt.Domain.Entities.Users;
@@ -8,6 +7,7 @@ using AbuInt.Service.Extensions;
 using AbuInt.Service.Interfaces;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace AbuInt.Service.Services;
 
@@ -29,12 +29,12 @@ public class ExperienceService : IExperienceService
             throw new CustomException(400, "Experience already exists");
 
         experience = experienceForCreationDto.Adapt<Experience>();
-        
+
         experience.Create();
         var res = await this.unitOfWork.Experiences.CreateAsync(experience);
         await unitOfWork.SaveChangesAsync();
         return res;
-        
+
     }
 
     public async ValueTask<Experience> GetAsync(Expression<Func<Experience, bool>> expression)
@@ -53,7 +53,7 @@ public class ExperienceService : IExperienceService
 
         if (search is not null)
             experiance = experiance.Where(ex => ex.CompanyName == search);
-        
+
         return await experiance.ToPagedList(@params).ToListAsync();
     }
 
@@ -74,7 +74,7 @@ public class ExperienceService : IExperienceService
 
     public async ValueTask<bool> DeleteAsync(Expression<Func<Experience, bool>> expression)
     {
-        Experience experience = await  this.unitOfWork.Experiences.GetAsync(expression);
+        Experience experience = await this.unitOfWork.Experiences.GetAsync(expression);
 
         if (experience is null)
             throw new CustomException(404, "Experiance not found");

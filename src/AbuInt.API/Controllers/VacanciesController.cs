@@ -2,7 +2,6 @@
 using AbuInt.Domain.Entities.Companies;
 using AbuInt.Service.DTOs.Company;
 using AbuInt.Service.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RESTFulSense.Controllers;
 

@@ -1,6 +1,4 @@
-using System.Reflection.Metadata.Ecma335;
 using AbuInt.Data.IRepositories;
-using AbuInt.Domain.Entities.Users;
 using AbuInt.Service.DTOs.Users;
 using AbuInt.Service.Exceptions;
 using AbuInt.Service.Helpers;
@@ -16,16 +14,12 @@ public class AccountService : IAccountService
     private readonly FIleHelper fileHelper;
     private readonly ICacheService cacheService;
     private readonly EmailHelper emailHelper;
-<<<<<<< HEAD
-    public AccountService(IUnitOfWork unitOfWork, FIleHelper fileHelper, ICacheService cacheService, EmailHelper emailHelper, IAuthService authService)
-=======
     public AccountService(
         IUnitOfWork unitOfWork,
         FIleHelper fileHelper,
         IMemoryCache memoryCache,
         EmailHelper emailHelper,
         IAuthService authService)
->>>>>>> 26bcaa35a942b2a53935fb90b5797b0cf08da3b3
     {
         this.unitOfWork = unitOfWork;
         this.fileHelper = fileHelper;
@@ -34,7 +28,7 @@ public class AccountService : IAccountService
         this.authService = authService;
     }
 
-    public async ValueTask<string> UserLogInAsync(UserForLoginDto userForLoginDto) => 
+    public async ValueTask<string> UserLogInAsync(UserForLoginDto userForLoginDto) =>
         await authService.GenerateToken(userForLoginDto.Gmail, userForLoginDto.Password);
 
     public async ValueTask<bool> VerifyEmailAsync(EmailVerify emailVerify)

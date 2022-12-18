@@ -16,7 +16,6 @@ public class UnitOfWork : IUnitOfWork
 
     #region Companies
     public IRepository<Company> Companies { get; }
-    public IRepository<Interview> Interviews { get; }
     public IRepository<Vacancy> Vacancies { get; }
     #endregion
 
@@ -32,6 +31,13 @@ public class UnitOfWork : IUnitOfWork
     public IRepository<Quize> Quizes { get; }
     public IRepository<QuizeResult> QuizeResults { get; }
     #endregion
+
+    #region Chats
+    public IRepository<Message> Messages { get; }
+    public IRepository<Participant> Participants { get; }
+    public IRepository<Interview> Interviews { get; }
+    public IRepository<Room> Rooms { get; }
+    #endregion 
 
     public AbuIntDbContext DbContext { get; }
 
@@ -61,9 +67,16 @@ public class UnitOfWork : IUnitOfWork
         Quizes = new Repository<Quize>(dbContext);
         QuizeResults = new Repository<QuizeResult>(dbContext);
         #endregion
-}
 
-public void Dispose() 
+        #region Chats
+        Messages = new Repository<Message>(dbContext);
+        Participants = new Repository<Participant>(dbContext);
+        Interviews = new Repository<Interview>(dbContext);
+        Rooms = new Repository<Room>(dbContext);
+        #endregion
+    }
+
+    public void Dispose()
     {
         GC.SuppressFinalize(this);
     }

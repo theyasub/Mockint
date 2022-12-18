@@ -1,6 +1,5 @@
 ﻿using AbuInt.Domain.Commons;
 using AbuInt.Domain.Enums;
-using System.Collections;
 
 namespace AbuInt.Domain.Entities.Chats;
 

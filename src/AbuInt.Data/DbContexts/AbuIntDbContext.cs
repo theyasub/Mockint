@@ -27,16 +27,18 @@ public class AbuIntDbContext : DbContext
 			.WithMany(x => x.Vacancies)
 			.OnDelete(DeleteBehavior.NoAction);
 
-    modelBuilder.Entity<User>().Navigation(x => x.Image).AutoInclude();
+		modelBuilder.Entity<User>().Navigation(x => x.Image).AutoInclude();
+
+		modelBuilder.Entity<Participant>().Navigation(x => x.User).AutoInclude();
 
 	}
 
 	#region Asset
 	public DbSet<Asset> Assets { get; set; }
-    #endregion
+	#endregion
 
-    #region Companies
-    public DbSet<Company> Companies { get; set; }
+	#region Companies
+	public DbSet<Company> Companies { get; set; }
 	public DbSet<Interview> Interviews { get; set; }
 	public DbSet<Vacancy> Vacancies { get; set; }
 	#endregion
@@ -45,18 +47,18 @@ public class AbuIntDbContext : DbContext
 	public DbSet<User> Users { get; set; }
 	public DbSet<Experience> Experiences { get; set; }
 	public DbSet<UserDetail> UserDetails { get; set; }
-    #endregion
+	#endregion
 
-    #region Chats 
+	#region Chats 
 
 	public DbSet<Room> Rooms { get; set; }
 	public DbSet<Participant> Participants { get; set; }
 	public DbSet<Message> Messages { get; set; }
 
-    #endregion
+	#endregion
 
-    #region Quizes (optional)
-    public DbSet<Question> Questions { get; set; }
+	#region Quizes (optional)
+	public DbSet<Question> Questions { get; set; }
 	public DbSet<QuestionAnswer> QuestionAnswers { get; set; }
 	public DbSet<Quize> Quizes { get; set; }
 	public DbSet<QuizeResult> QuizeResults { get; set; }
