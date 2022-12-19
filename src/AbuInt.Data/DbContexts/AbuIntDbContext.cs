@@ -29,6 +29,7 @@ public class AbuIntDbContext : DbContext
 
         modelBuilder.Entity<User>().Navigation(x => x.Image).AutoInclude();
 
+        modelBuilder.Entity<Participant>().Navigation(x => x.User).AutoInclude();
     }
 
     #region Asset

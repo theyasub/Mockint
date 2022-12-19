@@ -33,6 +33,12 @@ public class UnitOfWork : IUnitOfWork
     public IRepository<QuizeResult> QuizeResults { get; }
     #endregion
 
+    #region Chats
+    public IRepository<Room> Rooms { get; }
+    public IRepository<Participant> Participants { get; }
+    public IRepository<Message> Messages { get; }
+    #endregion
+
     public AbuIntDbContext DbContext { get; }
 
     public UnitOfWork(AbuIntDbContext dbContext)
@@ -60,6 +66,12 @@ public class UnitOfWork : IUnitOfWork
         QuestionAnswers = new Repository<QuestionAnswer>(dbContext);
         Quizes = new Repository<Quize>(dbContext);
         QuizeResults = new Repository<QuizeResult>(dbContext);
+        #endregion
+
+        #region Chats
+        Rooms = new Repository<Room>(dbContext);
+        Participants = new Repository<Participant>(dbContext);
+        Messages = new Repository<Message>(dbContext);
         #endregion
     }
 
