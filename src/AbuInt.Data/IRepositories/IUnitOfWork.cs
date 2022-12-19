@@ -32,6 +32,12 @@ public interface IUnitOfWork : IDisposable
     public IRepository<QuizeResult> QuizeResults { get; }
     #endregion
 
+    #region Chats
+    IRepository<Room> Rooms { get; }
+    IRepository<Participant> Participants { get; }
+    IRepository<Message> Messages { get; }
+    #endregion
+
     public AbuIntDbContext DbContext { get; }
 
     public Task<int> SaveChangesAsync();
