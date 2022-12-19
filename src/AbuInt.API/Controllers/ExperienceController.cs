@@ -28,7 +28,7 @@ public class ExperienceController : RESTFulController
         => Ok(await this.experienceService.CreateAsync(experienceForCreationDto));
 
     /// <summary>
-    /// Update existed experience
+    /// Update existed experience.
     /// </summary>
     /// <param name="id"></param>
     /// <param name="experienceForCreationDto"></param>
