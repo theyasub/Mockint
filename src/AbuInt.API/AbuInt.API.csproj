@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
-    <Folder Include="wwwroot\files\" />
+	<Folder Include="wwwroot\files\" />
     <ProjectReference Include="..\AbuInt.Data\AbuInt.Data.csproj" />
     <ProjectReference Include="..\AbuInt.Service\AbuInt.Service.csproj" />
     <Folder Include="Logs\" />
