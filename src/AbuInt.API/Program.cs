@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-
+//PR o'rganish uchun projectni clone qildik.
 // Add services to the container.
 
 builder.Services.AddControllers();
